@@ -2,8 +2,8 @@
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| nickname           | string | null: false |
-| email              | string | null: false |
+| nickname           | string | null: false, unique: true |
+| email              | string | null: false, unique: true |
 | encrypted_password | string | null: false |
 | first_name         | string | null: false |
 | last_name          | string | null: false |
@@ -17,23 +17,22 @@
 
 ## itemsテーブル
 
-| Column            | Type       | Options                        |
-| ----------------- | ---------- | ------------------------------ |
-| name              | string     | null: false                    |
-| email             | string     | null: false                    |
-| explanation       | text       | null: false                    |
-| product_category  | string     | null: false                    |
-| product_condition | string     | null: false                    |
-| delivery_fee      | string     | null: false                    |
-| delivery_days     | string     | null: false                    |
-| price             | string     | null: false                    |
-| user              | references | null: false, foreign_key:true  |
+| Column               | Type       | Options                        |
+| -----------------    | ---------- | ------------------------------ |
+| name                 | string     | null: false                    |
+| explanation          | text       | null: false                    |
+| product_category_id  | integer    | null: false                    |
+| product_condition_id | integer    | null: false                    |
+| delivery_fee_id      | integer    | null: false                    |
+| delivery_area_id     | integer    | null: false                    |
+| delivery_days_id     | integer    | null: false                    |
+| price                | numeric    | null: false                    |
+| user                 | references | null: false, foreign_key:true  |
 
 ### Association
 - belongs_to :user
 - has_one :purchase
 - has_one_attached :image
-- has_one :shipping
 
 ## shippingsテーブル
 
@@ -43,13 +42,12 @@
 | prefectures      | string     | null: false                    |
 | municipalities   | string     | null: false                    |
 | address          | string     | null: false                    |
-| building_name    | string     | null: false                    |
+| building_name    | string     |
 | telephone number | string     | null: false                    |
-| item             | references | null: false, foreign_key:true  |
+| purchase         | references | null: false, foreign_key:true  |
 
 ### Association
-- has_one :purchase
-- belongs_to :item
+- belongs_to  :purchase
 
 
 
@@ -60,9 +58,8 @@
 | ----------------- | ---------- | ------------------------------ |
 | user              | references | null: false, foreign_key:true  |
 | item              | references | null: false, foreign_key:true  |
-| shipping          | references | null: false, foreign_key:true  |
 
 ### Association
 - belongs_to :user
 - belongs_to :item
-- belongs_to :shipping
+- has_one :shipping
