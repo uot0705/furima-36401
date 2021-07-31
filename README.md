@@ -1,24 +1,68 @@
-# README
+## usersテーブル
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| nickname           | string | null: false |
+| email              | string | null: false |
+| encrypted_password | string | null: false |
+| first_name         | string | null: false |
+| last_name          | string | null: false |
+| first_name_kana    | string | null: false |
+| last_name_kana     | string | null: false |
+| birthday           | date   | null: false |
 
-Things you may want to cover:
+### Association
+- has_many :items
+- has_many :purchases
 
-* Ruby version
+## itemsテーブル
 
-* System dependencies
+| Column            | Type       | Options                        |
+| ----------------- | ---------- | ------------------------------ |
+| name              | string     | null: false                    |
+| email             | string     | null: false                    |
+| explanation       | text       | null: false                    |
+| product_category  | string     | null: false                    |
+| product_condition | string     | null: false                    |
+| delivery_fee      | string     | null: false                    |
+| delivery_days     | string     | null: false                    |
+| price             | string     | null: false                    |
+| user              | references | null: false, foreign_key:true  |
 
-* Configuration
+### Association
+- belongs_to :user
+- has_one :purchase
+- has_one_attached :image
+- has_one :shipping
 
-* Database creation
+## shippingsテーブル
 
-* Database initialization
+| Column           | Type       | Options                        |
+| ---------------- | ---------- | ------------------------------ |
+| postal_code      | string     | null: false                    |
+| prefectures      | string     | null: false                    |
+| municipalities   | string     | null: false                    |
+| address          | string     | null: false                    |
+| building_name    | string     | null: false                    |
+| telephone number | string     | null: false                    |
+| item             | references | null: false, foreign_key:true  |
 
-* How to run the test suite
+### Association
+- has_one :purchase
+- belongs_to :item
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
 
-* ...
+
+## purchasesテーブル
+
+| Column            | Type       | Options                        |
+| ----------------- | ---------- | ------------------------------ |
+| user              | references | null: false, foreign_key:true  |
+| item              | references | null: false, foreign_key:true  |
+| shipping          | references | null: false, foreign_key:true  |
+
+### Association
+- belongs_to :user
+- belongs_to :item
+- belongs_to :shipping
