@@ -24,8 +24,8 @@
 | product_category_id  | integer    | null: false                    |
 | product_condition_id | integer    | null: false                    |
 | delivery_fee_id      | integer    | null: false                    |
-| delivery_area_id     | integer    | null: false                    |
-| delivery_days_id     | integer    | null: false                    |
+| prefecture_id        | integer    | null: false                    |
+| delivery_day_id      | integer    | null: false                    |
 | price                | integer    | null: false                    |
 | user                 | references | null: false, foreign_key:true  |
 
@@ -39,8 +39,8 @@
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
 | postal_code      | string     | null: false                    |
-| prefectures_id   | integer    | null: false                    |
-| municipalities   | string     | null: false                    |
+| prefecture_id    | integer    | null: false                    |
+| municipalitie   | string     | null: false                    |
 | address          | string     | null: false                    |
 | building_name    | string     |
 | telephone_number | string     | null: false                    |
