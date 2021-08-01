@@ -2,7 +2,7 @@
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| nickname           | string | null: false, unique: true |
+| nickname           | string | null: false |
 | email              | string | null: false, unique: true |
 | encrypted_password | string | null: false |
 | first_name         | string | null: false |
@@ -26,7 +26,7 @@
 | delivery_fee_id      | integer    | null: false                    |
 | delivery_area_id     | integer    | null: false                    |
 | delivery_days_id     | integer    | null: false                    |
-| price                | numeric    | null: false                    |
+| price                | integer    | null: false                    |
 | user                 | references | null: false, foreign_key:true  |
 
 ### Association
@@ -39,11 +39,11 @@
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
 | postal_code      | string     | null: false                    |
-| prefectures      | string     | null: false                    |
+| prefectures_id   | integer    | null: false                    |
 | municipalities   | string     | null: false                    |
 | address          | string     | null: false                    |
 | building_name    | string     |
-| telephone number | string     | null: false                    |
+| telephone_number | string     | null: false                    |
 | purchase         | references | null: false, foreign_key:true  |
 
 ### Association
