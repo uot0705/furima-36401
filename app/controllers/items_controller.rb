@@ -16,9 +16,11 @@ class ItemsController < ApplicationController
     else
       render :new
     end
+end
 
-  end
-
+def show
+  @item = Item.find(params[:id])
+end
   private
   def item_params
     params.require(:item).permit(:name, :explanation, :product_category_id, :product_condition_id, 
