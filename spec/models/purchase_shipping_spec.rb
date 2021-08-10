@@ -19,6 +19,16 @@ RSpec.describe PurchaseShipping, type: :model do
     end
     
     context '購入できないとき' do
+      it 'user_idが空では登録できない' do
+        @p_s.user_id = ""
+        @p_s.valid?
+        expect(@p_s.errors.full_messages).to include "User can't be blank"
+      end
+      it 'item_idが空では登録できない' do
+        @p_s.item_id = ""
+        @p_s.valid?
+        expect(@p_s.errors.full_messages).to include "Item can't be blank"
+      end
       #カード情報
       it 'tokenが空では登録できない' do
         @p_s.token = ""
