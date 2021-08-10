@@ -10,4 +10,6 @@ FactoryBot.define do
     building_name  {"渋谷ビル"}
     telephone_number          { "09012345678" }
   end
+  
+
 end
