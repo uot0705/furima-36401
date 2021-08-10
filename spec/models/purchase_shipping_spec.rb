@@ -77,6 +77,11 @@ RSpec.describe PurchaseShipping, type: :model do
         @p_s.valid?
         expect(@p_s.errors.full_messages).to include "Telephone number is invalid"
       end
+      it '電話番号が半角文字混合だと登録できない' do
+        @p_s.telephone_number = "0901234123a"
+        @p_s.valid?
+        expect(@p_s.errors.full_messages).to include "Telephone number is invalid"
+      end
       it '電話番号に-があると登録できない' do
         @p_s.telephone_number = "090-1234-1234"
         @p_s.valid?

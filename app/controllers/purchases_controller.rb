@@ -1,17 +1,15 @@
 class PurchasesController < ApplicationController
-  before_action :authenticate_user!, only: :index
-  before_action :item_purchase ,only: :index
+  before_action :authenticate_user!, only: [:index,:create]
+  before_action :find_action ,only: [:index, :create]
+  before_action :item_purchase ,only: [:index,:create]
  
   
   def index
     @purchases_shipping = PurchaseShipping.new
-    @item = Item.find(params[:item_id])
-
   end
 
   def create
      @purchases_shipping = PurchaseShipping.new(purchases_params)
-     @item = Item.find(params[:item_id])
    if @purchases_shipping.valid?
     pay_item
     @purchases_shipping.save
@@ -27,6 +25,10 @@ class PurchasesController < ApplicationController
        :address, :building_name, :telephone_number).merge(user_id: current_user.id ,item_id: params[:item_id],token: params[:token])
    end
 
+   def find_action
+    @item = Item.find(params[:item_id])
+  end
+
    def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  
     Payjp::Charge.create(
@@ -38,7 +40,6 @@ class PurchasesController < ApplicationController
 
 
    def  item_purchase 
-     @item = Item.find(params[:item_id])
     if @item.purchase
       redirect_to root_path
     end
