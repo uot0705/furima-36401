@@ -10,7 +10,6 @@ class PurchasesController < ApplicationController
   end
 
   def create
-    binding.pry
      @purchases_shipping = PurchaseShipping.new(purchases_params)
    if @purchases_shipping.valid?
     pay_item
